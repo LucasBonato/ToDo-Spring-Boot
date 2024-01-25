@@ -47,7 +47,7 @@ public class UserService {
         try {
             userRepository.deleteById(id);
         } catch (Exception e) {
-            throw new RuntimeException();
+            throw new RuntimeException("Não é possível deletar, pois há entidades relacionadas.");
         }
     }
 }
