@@ -1,6 +1,5 @@
 package com.lucasbonato.todosimple.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -12,11 +11,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "user")
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
-@AllArgsConstructor
-@NoArgsConstructor
 public class User {
     public interface CreateUser {}
     public interface UpdateUser {}
@@ -38,10 +37,6 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Task> tasks = new ArrayList<Task>();
-
-    @JsonIgnore
-    public List<Task> getTasks() {
-        return tasks;
-    }
 }
