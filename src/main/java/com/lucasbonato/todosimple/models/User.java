@@ -6,6 +6,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "user")
 @Getter
@@ -33,5 +36,6 @@ public class User {
     @Size(groups = {CreateUser.class, UpdateUser.class}, min = 8, max = 60)
     private String password;
 
-    //private List<Task> tasks = new ArrayList<Task>();
+    @OneToMany(mappedBy = "user")
+    private List<Task> tasks = new ArrayList<Task>();
 }
