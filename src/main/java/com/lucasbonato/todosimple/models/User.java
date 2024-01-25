@@ -1,5 +1,6 @@
 package com.lucasbonato.todosimple.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -38,4 +39,9 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Task> tasks = new ArrayList<Task>();
+
+    @JsonIgnore
+    public List<Task> getTasks() {
+        return tasks;
+    }
 }
