@@ -1,8 +1,9 @@
 package com.lucasbonato.todosimple.services;
 
 import com.lucasbonato.todosimple.models.User;
-import com.lucasbonato.todosimple.repositories.TaskRepository;
 import com.lucasbonato.todosimple.repositories.UserRepository;
+import com.lucasbonato.todosimple.services.exceptions.DataBindingViolationException;
+import com.lucasbonato.todosimple.services.exceptions.ObjectNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class UserService {
 
     public User findById(Long id) {
         Optional<User> user = userRepository.findById(id);
-        return user.orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+        return user.orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado."));
     }
 
     @Transactional
@@ -47,7 +48,7 @@ public class UserService {
         try {
             userRepository.deleteById(id);
         } catch (Exception e) {
-            throw new RuntimeException("Não é possível deletar, pois há entidades relacionadas.");
+            throw new DataBindingViolationException("Não é possível deletar, pois há entidades relacionadas.");
         }
     }
 }
