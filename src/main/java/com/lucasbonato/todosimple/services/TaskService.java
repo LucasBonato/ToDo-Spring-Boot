@@ -19,7 +19,7 @@ public class TaskService {
 
     public Task findById(Long id) {
         Optional<Task> task = taskRepository.findById(id);
-        return task.orElseThrow(() -> new RuntimeException("Tarefa não encontrada"));
+        return task.orElseThrow(() -> new RuntimeException("Tarefa não encontrada."));
     }
 
     @Transactional
@@ -43,7 +43,7 @@ public class TaskService {
         try {
             taskRepository.deleteById(id);
         } catch (Exception e) {
-            throw new RuntimeException("Não é possível deletar, pois há entidades relacionadas");
+            throw new RuntimeException();
         }
     }
 

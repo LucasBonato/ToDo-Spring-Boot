@@ -19,7 +19,7 @@ public class UserService {
 
     public User findById(Long id) {
         Optional<User> user = userRepository.findById(id);
-        return user.orElseThrow(() -> new RuntimeException("Usuário não encontrado. \nID: " + id + ", Tipo: " + User.class.getName()));
+        return user.orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
     }
 
     @Transactional
@@ -41,7 +41,7 @@ public class UserService {
         try {
             userRepository.deleteById(id);
         } catch (Exception e) {
-            throw new RuntimeException("Não é possível deletar, pois há entidades relacionadas.");
+            throw new RuntimeException();
         }
     }
 }
