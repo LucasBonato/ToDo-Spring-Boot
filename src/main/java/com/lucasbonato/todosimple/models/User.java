@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -48,6 +48,12 @@ public class User implements UserDetails {
     @Column(nullable = false)
     @NotNull
     private UserRoles role;
+
+    public User(String username, String password, UserRoles role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
